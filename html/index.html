@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Evan DJ</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div id="player"></div>
+    <div id="playlistResolver"></div>
+
+    <div id="djApp" class="hidden">
+        <div class="dj-card">
+            <div class="dj-header">
+                <div>
+                    <h1>DJ Booth</h1>
+                    <p id="locationName">Location</p>
+                </div>
+                <button id="closeBtn">×</button>
+            </div>
+
+            <div class="now-playing">
+                <span>Now Playing</span>
+                <strong id="nowPlaying">Nothing playing</strong>
+            </div>
+
+            <div class="form-group">
+                <label>YouTube Link</label>
+                <input id="urlInput" type="text" placeholder="https://www.youtube.com/playlist?list=..." />
+            </div>
+
+            <div class="volume-group">
+                <div class="volume-label-row">
+                    <label for="volumeSlider">Booth Volume</label>
+                    <span id="volumeValue">75%</span>
+                </div>
+                <input id="volumeSlider" type="range" min="0" max="100" value="75" />
+            </div>
+
+            <button id="addBtn" class="primary-btn">Add To This Booth Queue</button>
+            <div id="statusMessage" class="status-message hidden"></div>
+
+            <div class="button-row">
+                <button id="skipBtn">Skip</button>
+                <button id="stopBtn">Stop</button>
+                <button id="refreshBtn">Refresh</button>
+            </div>
+
+            <div class="queue-box">
+                <div class="queue-title">This Booth Queue</div>
+                <div id="queueList" class="queue-list">
+                    <p>No songs queued.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="app.js"></script>
+</body>
+</html>
