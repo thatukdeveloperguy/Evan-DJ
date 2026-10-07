@@ -3,8 +3,8 @@ game 'gta5'
 lua54 'yes'
 
 author 'OMBF & TheEvanGuy'
-description 'Jim_DJ doesnt work without QB so Evan built a replacement'
-version '0.0.5'
+description 'Music player'
+version '1.1.1'
 
 ui_page 'html/index.html'
 
@@ -24,6 +24,10 @@ client_scripts {
 
 server_scripts {
     'server.lua'
+}
+
+escrow_ignore {
+    'config.lua'
 }
 
 dependency 'ox_target'
