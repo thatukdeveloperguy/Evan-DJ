@@ -2,57 +2,108 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Evan DJ</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div id="player"></div>
-    <div id="playlistResolver"></div>
+    <div id="playerA" class="yt-hidden"></div>
+    <div id="playerB" class="yt-hidden"></div>
+    <div id="playlistResolver" class="yt-hidden"></div>
 
     <div id="djApp" class="hidden">
-        <div class="dj-card">
-            <div class="dj-header">
-                <div>
+        <main class="dj-card" role="dialog" aria-modal="true" aria-label="DJ Booth">
+            <header class="dj-header">
+                <div class="brand-block">
+                    <div class="eyebrow">EVAN DJ SYSTEM</div>
                     <h1>DJ Booth</h1>
-                    <p id="locationName">Location</p>
+                    <div class="location-row">
+                        <span class="live-dot"></span>
+                        <p id="locationName">Location</p>
+                    </div>
                 </div>
-                <button id="closeBtn">×</button>
-            </div>
+                <button id="closeBtn" class="icon-btn close-btn" type="button" aria-label="Close">×</button>
+            </header>
 
-            <div class="now-playing">
-                <span>Now Playing</span>
-                <strong id="nowPlaying">Nothing playing</strong>
-            </div>
+            <div class="dj-layout">
+                <section class="left-panel">
+                    <article class="now-playing-card">
+                        <div class="artwork-shell">
+                            <img id="nowArtwork" alt="Current track artwork" />
+                            <div id="artworkFallback" class="artwork-fallback">♪</div>
+                            <div id="crossfadeBadge" class="crossfade-badge hidden">CROSSFADE</div>
+                        </div>
 
-            <div class="form-group">
-                <label>YouTube Link</label>
-                <input id="urlInput" type="text" placeholder="https://www.youtube.com/playlist?list=..." />
-            </div>
+                        <div class="now-content">
+                            <div class="section-kicker">Now Playing</div>
+                            <h2 id="nowPlaying">Nothing playing</h2>
+                            <p id="nowAuthor" class="track-author">Waiting for a track</p>
 
-            <div class="volume-group">
-                <div class="volume-label-row">
-                    <label for="volumeSlider">Booth Volume</label>
-                    <span id="volumeValue">75%</span>
-                </div>
-                <input id="volumeSlider" type="range" min="0" max="100" value="75" />
-            </div>
+                            <div class="progress-wrap">
+                                <div class="progress-track">
+                                    <div id="progressBar" class="progress-bar"></div>
+                                </div>
+                                <div class="time-row">
+                                    <span id="elapsedTime">0:00</span>
+                                    <span id="durationTime">0:00</span>
+                                </div>
+                            </div>
 
-            <button id="addBtn" class="primary-btn">Add To This Booth Queue</button>
-            <div id="statusMessage" class="status-message hidden"></div>
+                            <div class="track-meta-row">
+                                <span id="videoIdLabel">No video loaded</span>
+                                <span id="crossfadeInfo">Crossfade ready</span>
+                            </div>
+                        </div>
+                    </article>
 
-            <div class="button-row">
-                <button id="skipBtn">Skip</button>
-                <button id="stopBtn">Stop</button>
-                <button id="refreshBtn">Refresh</button>
-            </div>
+                    <section class="control-card">
+                        <div class="form-group">
+                            <label for="urlInput">YouTube video or playlist</label>
+                            <div class="url-row">
+                                <input id="urlInput" type="text" placeholder="Paste a YouTube link..." autocomplete="off" />
+                                <button id="addBtn" class="primary-btn" type="button">Add</button>
+                            </div>
+                        </div>
 
-            <div class="queue-box">
-                <div class="queue-title">This Booth Queue</div>
-                <div id="queueList" class="queue-list">
-                    <p>No songs queued.</p>
-                </div>
+                        <div class="volume-group">
+                            <div class="volume-label-row">
+                                <label for="volumeSlider">Booth Volume</label>
+                                <span id="volumeValue">75%</span>
+                            </div>
+                            <input id="volumeSlider" type="range" min="0" max="100" value="75" />
+                        </div>
+
+                        <div id="statusMessage" class="status-message hidden"></div>
+
+                        <div class="transport-row">
+                            <button id="skipBtn" class="secondary-btn" type="button">Skip</button>
+                            <button id="stopBtn" class="danger-btn" type="button">Stop &amp; Clear</button>
+                            <button id="refreshBtn" class="secondary-btn" type="button">Refresh</button>
+                        </div>
+                    </section>
+                </section>
+
+                <section class="queue-panel">
+                    <div class="queue-header">
+                        <div>
+                            <div class="section-kicker">Up Next</div>
+                            <h3>Queue</h3>
+                        </div>
+                        <div id="queueCount" class="queue-count">0 tracks</div>
+                    </div>
+
+                    <div class="queue-help">Hold the ⋮⋮ handle and drag to reorder, or use the arrow controls.</div>
+
+                    <div id="queueList" class="queue-list">
+                        <div class="empty-state">
+                            <div class="empty-icon">♫</div>
+                            <strong>No songs queued</strong>
+                            <span>Add a YouTube video or playlist to get started.</span>
+                        </div>
+                    </div>
+                </section>
             </div>
-        </div>
+        </main>
     </div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
